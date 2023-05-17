@@ -887,6 +887,42 @@ class PluginWindow(popup.PopupWindow):
                       text='by ' + self.plugin.info["authors"][0]["name"],
                       scale=text_scale * 0.8,
                       color=color, maxwidth=width * 0.9)
+        # MK:
+        def author_window():
+            ui_bounds=ba.App().ui_bounds
+            pos=(ui_bounds[0]/2,ui_bounds[2]/2)
+            author_window = None #initalizing
+
+            close_window = lambda:ba.containerwidget(edit=author_window_root, transition="out_right",)
+
+            author_window_root= ba.containerwidget(
+                    size=(500,500),
+                    position=pos,
+                    transition="in_right",
+                    parent=self._root_widget,
+                    claim_outside_clicks=True,
+                    on_cancel_call=close_window,
+                    on_outside_click_call=close_window,
+                    )
+                
+            print(self.plugin.info["authors"])
+            ba.textwidget(
+                parent=author_window_root,
+                text=self.plugin.info["authors"][0]["name"],
+            )
+            ba.buttonwidget(
+                parent=author_window_root,
+                icon=ba.gettexture("discordLogo")
+            )
+            
+        author_btn=ba.buttonwidget(
+            parent=self._root_widget,
+            position=(width * 0.6, pos),
+            size=(20, 10),
+            label="...",
+            on_activate_call=author_window
+        )
+        
         pos -= 35
         # status = ba.textwidget(parent=self._root_widget,
         #                        position=(width * 0.49, pos), size=(0, 0),
