@@ -21,24 +21,8 @@ original_checkboxwidget = bui.checkboxwidget
 # `bui.app.classic.accounts.have_pro` method.
 original_have_pro = None
 original_add_transaction = bui.app.plus.add_v1_account_transaction
-
-
 class ColorScheme:
     """
-    Apply a colorscheme to the game. Can also be invoked directly
-    through the BombSquad's in-game console. See examples for more
-    details.
-
-    Parameters
-    ----------
-    color: `tuple`
-        A tuple consisting of (R,G,B) channel values where each channel
-        is a float ranging between 0 to 1.
-
-    highlight: `tuple`
-        A tuple consisting of (R,G,B) channel values where each channel
-        is a float ranging between 0 to 1.
-
     Examples
     --------
     + Apply dark colorscheme:
@@ -71,16 +55,13 @@ class ColorScheme:
         >>> import _babase
         >>> _babase.ColorScheme.disable()
     """
-
     def __init__(self, color=None, highlight=None):
         self.color = color
         self.highlight = highlight
-
     def _custom_buttonwidget(self, *args, **kwargs):
         assert self.highlight is not None
         kwargs["color"] = self.highlight
         return original_buttonwidget(*args, **kwargs)
-
     def _custom_containerwidget(self, *args, **kwargs):
         assert self.color is not None
         kwargs["color"] = self.color
