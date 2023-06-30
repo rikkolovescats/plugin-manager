@@ -21,6 +21,8 @@ original_checkboxwidget = bui.checkboxwidget
 # `bui.app.classic.accounts.have_pro` method.
 original_have_pro = None
 original_add_transaction = bui.app.plus.add_v1_account_transaction
+
+
 class ColorScheme:
     """
     Examples
@@ -55,13 +57,16 @@ class ColorScheme:
         >>> import _babase
         >>> _babase.ColorScheme.disable()
     """
+
     def __init__(self, color=None, highlight=None):
         self.color = color
         self.highlight = highlight
+
     def _custom_buttonwidget(self, *args, **kwargs):
         assert self.highlight is not None
         kwargs["color"] = self.highlight
         return original_buttonwidget(*args, **kwargs)
+
     def _custom_containerwidget(self, *args, **kwargs):
         assert self.color is not None
         kwargs["color"] = self.color
